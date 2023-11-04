@@ -3,11 +3,14 @@ import express  from "express";
 import mongoose from "mongoose";
 // importing router
 import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
 
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+
 // connecting to mongoDB
 mongoose.connect(process.env.MONGO).then(() => {
     console.log("Connected to DB...");
@@ -22,3 +25,5 @@ app.listen(3000, () => {
 
 // Using user router
 app.use('/api/user', userRouter);
+
+app.use('/api/auth', authRouter);
